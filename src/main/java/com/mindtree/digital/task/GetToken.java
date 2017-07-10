@@ -58,7 +58,7 @@ public class GetToken {
 
 	public List<List<String>> getTemplatesList() throws Exception {
 
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		Client client = Client.create();
 		WebResource webResource = client.resource("https://cloudbag.mindtree.com/api/Artifacts?userId=m1035913");
@@ -95,7 +95,7 @@ public class GetToken {
 	}
 
 	public List<String> getArtifactIds() throws Exception {
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		Client client = Client.create();
 		WebResource webResource = client.resource("https://cloudbag.mindtree.com/api/Artifacts?userId=m1035913");
@@ -124,7 +124,7 @@ public class GetToken {
 	}
 
 	public Map<String, String> getArtifactIdandNames() throws Exception {
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		Client client = Client.create();
 		WebResource webResource = client.resource("https://cloudbag.mindtree.com/api/Artifacts?userId=m1035913");
@@ -155,7 +155,7 @@ public class GetToken {
 	}
 
 	public String getArtifactIDFromName(String artifactName) throws Exception {
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		Client client = Client.create();
 		WebResource webResource = client.resource("https://cloudbag.mindtree.com/api/Artifacts?userId=m1035913");
@@ -187,7 +187,7 @@ public class GetToken {
 	}
 
 	public JSONObject getSingleTemplateJSONData(String id) throws Exception {
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		System.out.println(tokenString);
 		Client client = Client.create();
@@ -234,7 +234,7 @@ public class GetToken {
 
 	public Map<String, String> getSingleTemplateData(String id) throws Exception {
 
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		System.out.println(tokenString);
 		Client client = Client.create();
@@ -286,7 +286,7 @@ public class GetToken {
 	
 	public String deleteVM(JSONObject deleteObject) throws Exception {
 
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		try {
 			Client client1 = Client.create();
@@ -308,7 +308,7 @@ public class GetToken {
 
 	public String stopTemplate(JSONObject stopObject) throws Exception {
 
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		try {
 			Client client1 = Client.create();
@@ -330,7 +330,7 @@ public class GetToken {
 
 	public String startTemplate(JSONObject startObject) throws Exception {
 
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		try {
 			Client client1 = Client.create();
@@ -353,7 +353,7 @@ public class GetToken {
 	public String executeTemplate(JSONObject executeObject) throws Exception {
 
 		System.out.println(executeObject);
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		try {
 			Client client1 = Client.create();
@@ -375,7 +375,7 @@ public class GetToken {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String tokenString = getAccessToken("M1035913@mindtree.com", "Collonel*2",
+		String tokenString = getAccessToken("M1035913@mindtree.com", "*2",
 				"ecc97145-098a-42a1-9a5b-71069e620f0d");
 		System.out.println(tokenString);
 		Client client = Client.create();
