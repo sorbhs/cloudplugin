@@ -1,0 +1,278 @@
+<html>
+<head>
+</head>
+<body>
+
+<div>
+
+[@ww.textfield labelKey="helloworld.say" name="say" required='true'/]
+
+</div>
+
+
+<div>
+
+[@ww.select toggle="true" value="selectedAction" label="Choose your action" list=listOfTemplates listKey="title" listValue="id" name="actions" list="actionList"/]
+
+</div>
+	<div id="fieldArea_cloudprovider" class="field-group">
+		<label for="cloudprovider" id="fieldLabelArea_cloudprovider">Cloud
+			Provider</label> <select name="label" id="label"
+			class="select builderSelectWidget ">
+			<#list cloudProvider as y>
+			<option value="${y}">${y}</option>
+			</#list>
+		</select>
+	</div>
+
+	<div id="fieldArea_clientid" class="field-group">
+		<label for="clientid" id="fieldLabelArea_clientid">Client ID</label> <input
+			type="text" name="clientid" id="clientid" class="text long-field "><br>
+		<div class="description" id="clientidDesc">"Hello this is
+			description clientid."</div>
+	</div>
+
+	<div id="fieldArea_clientsecret" class="field-group">
+		<label for="clientsecret" id="fieldLabelArea_clientsecret">Client
+			Secret</label> <input type="text" name="clientsecret" id="clientsecret"
+			class="text long-field "><br>
+		<div class="description" id="clientsecretDesc">"Hello this is
+			description client secret."</div>
+	</div>
+
+	<div id="fieldArea_tenantid" class="field-group">
+		<label for="tenantid" id="fieldLabelArea_tenantid">Tenant ID</label> <input
+			type="text" name="tenantid" id="tenantid" class="text long-field "><br>
+		<div class="description" id="tenantidDesc">"Hello this is
+			description tenant id."</div>
+	</div>
+
+	<div id="fieldArea_subscriptionid" class="field-group">
+		<label for="subscriptionid" id="fieldLabelArea_subscriptionid">Subscription
+			ID</label> <input type="text" name="subscriptionid" id="subscriptionid"
+			class="text long-field "><br>
+		<div class="description" id="subscriptionidDesc">"Hello this is
+			description subscription id."</div>
+	</div>
+
+	<div id="fieldArea_resourcegroupname" class="field-group">
+		<label for="resourcegroupname" id="fieldLabelArea_resourcegroupname">Resource
+			Group Name</label> <input type="text" name="resourcegroupname"
+			id="resourcegroupname" class="text long-field "><br>
+		<div class="description" id="resourcegroupname">"Hello this is
+			description resource group name."</div>
+	</div>
+
+	<div id="fieldArea_listofscripts" class="field-group">
+		<label for="listofscripts" id="fieldLabelArea_listofscripts">List
+			of scripts</label> <select name="label" id="label"
+			class="select builderSelectWidget ">
+			<#list listOfTemplates as y>
+			<option value="${y}">${y}</option>
+			</#list>
+		</select>
+	</div>
+
+</body>
+</html>
+
+[@ww.select labelKey='helloworld.say' name='gitExecutableKind' list=listOfTemplates listKey='key' listValue='value' toggle='true' /]
+
+
+
+[#list listOfTemplates.keySet() as executableTypeKey]
+    [@ui.bambooSection  dependsOn='gitExecutableKind' showOn=executableTypeKey]
+        [@ww.textfield labelKey='helloworld.say' name=executableTypeKey description=capabilityType.getExecutableDescription(executableTypeKey)/]
+    [/@ui.bambooSection]
+[/#list]
+
+
+document.getElementById('abc').innerHTML="There are no PMT boards for the given url";
+
+
+
+<table class="aui">
+  <tbody>
+    <tr>
+      <td>[@ww.select name='repository.gerrit.default.branch' id='repositoryGerritDefaultBranch' label='Default Branch' maxlength='50' size='1' onchange='enableCustomField();' list="{'master','All branches','Custom'}" /]</td>
+      <td>[@ww.textfield name='repository.gerrit.custom.branch' id='repositoryGerritCustomBranch' labelKey='Custom Branch' disabled='true' onchange='setCustomBranch(this.value);' /]</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+
+
+var text = '{"employees":[' +
+'{"firstName":"John","lastName":"Doe" },' +
+'{"firstName":"Anna","lastName":"Smith" },' +
+'{"firstName":"Peter","lastName":"Jones" }]}';
+
+obj = JSON.parse(text);
+document.getElementById("demo").innerHTML =
+obj.employees[1].firstName + " " + obj.employees[1].lastName;
+
+
+
+<div id="myDIV">
+<table>
+  <tbody>
+    <tr>
+     <td>[@ww.textfield name='chosenresultname' id='chosenresult' labelKey='Custom Branch 1' /]</td>
+    </tr>
+  </tbody>
+</table>
+</div> 
+ 
+ 
+ 
+[@ui.bambooSection  title="Servers1" ]
+ <table class="aui">
+  <tbody>
+ [@ww.iterator  value="allTemplateslist" id="ss"  ]
+ [@ww.if test='#ss.templateName=="Nexus_without_asg"']
+   <tr>
+  <td>[@ww.property name="parameterKey" value="%{#ss.templateid}" /]</td><td>[@ww.textfield name="parameterValue" value="%{#ss.templateName}" /]</td>
+ 	</tr>
+[/@ww.if ]
+[/@ww.iterator]
+</tbody>
+</table>
+[/@ui.bambooSection ]
+ 
+ 
+ 
+[@ui.bambooSection    title="Servers4"]
+<div id="myDIV1">
+<table class="aui">
+  <tbody>
+ [@ww.iterator  value="complexmap" id="tt"  ]
+ ${tt.key}
+ [@ww.if test='#tt.key==%{#chosenresult}']
+  [@ww.iterator  value="%{#tt.value}" id="tts"  ]
+   <tr>
+  <td> [@ww.property name="address" value="%{#tts.key}" /]</td>
+  <td> [@ww.textfield name="name" value="%{#tts.value}" /]</td>
+</tr>
+ [/@ww.iterator]
+[/@ww.if]
+[/@ww.iterator]
+</tbody>
+</table>
+</div>
+[/@ui.bambooSection ]
+ 
+ 
+ 
+ 
+ 
+<script type="text/javascript">
+  
+    function enableCustomField() {
+      var $sc = document.getElementById("repositoryGerritDefaultBranch");
+      var $txtField = document.getElementById("repositoryGerritCustomBranch");
+      var $indx=$sc.selectedIndex;
+      var $options=$sc.options;
+      
+      if (!customBranch) {
+          setCustomBranch($txtField.value)
+      }
+      if ($options[$indx].text === 'Custom') {
+          $txtField.disabled=false;
+          if (customBranch) {
+            $txtField.value=customBranch
+          }
+      } else {
+          $txtField.disabled=true;
+          $txtField.value=$options[$indx].text
+      }
+    }
+
+</script>
+<script type="text/javascript">
+ function displayGradleArtifactoryConfigs(myvalue) {
+  document.getElementById('chosenresult').value = myvalue; 
+   document.getElementById("myDIV").style.display = "block";
+}    
+</script>
+ 
+ 
+ 
+ var myDiv = document.getElementById("sorbhs");
+var array = ["Volvo","Saab","Mercades","Audi"];
+var selectList = document.createElement("select");
+selectList.id = "mySelect";
+myDiv.appendChild(selectList);
+for (var i = 0; i < array.length; i++) {
+    var option = document.createElement("option");
+    option.value = array[i];
+    option.text = array[i];
+    selectList.appendChild(option);
+}
+
+
+
+for(var k=0;k<abcv.templates[j].size;k++){
+container.appendChild(document.createTextNode(abcv.templates[j].parameters.bolo1));
+var input = document.createElement("input");
+input.type = "text";
+input.name = "member" + j;
+input.className = "text text";
+input.defaultValue=abcv.templates[j].parameters.bolo1;
+container.appendChild(input);
+container.appendChild(document.createElement("br"));
+\
+
+
+
+
+
+
+
+
+
+for(var j=0;j<abcv.size	;j++){
+if(myvalue==abcv.templates[j].name){
+for (var key in abcv.templates[j].parameters) {
+ if(abcv.templates[j].parameters.hasOwnProperty(key)) {
+    
+container.appendChild(document.createTextNode(key));
+var input = document.createElement("input");
+input.type = "text";
+input.name = key;
+input.className = "text text";
+input.defaultValue=abcv.templates[j].parameters[key];
+container.appendChild(input);
+container.appendChild(document.createElement("br"));
+    
+  }
+}
+
+}}
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+for(var j=0;j<abcv.size	;j++){
+if(myvalue==abcv.templates[j].name){
+for (var key in abcv.templates[j].parameters) {
+ if(abcv.templates[j].parameters.hasOwnProperty(key)) {
+    
+container.appendChild(document.createTextNode(key));
+var input = document.createElement("input");
+input.type = "text";
+input.name = key;
+input.className = "text text";
+input.defaultValue=abcv.templates[j].parameters[key];
+container.appendChild(input);
+container.appendChild(document.createElement("br"));
+  }
+}
+
+}}
+}
+ 

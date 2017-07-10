@@ -1,0 +1,142 @@
+<div>[@ww.textfield labelKey="helloworld.say" name="say"
+	required='true'/]</div>
+<div>
+	<select name="label" id="label" class="select builderSelectWidget ">
+		<#list listOfTemplates as user> ${user}
+		<option value="${user}">${user}</option>
+		</#list>
+	</select>
+</div>
+
+
+
+<select name="combo">
+    <#list mylist as it>
+        <#list it as tmplattribute>
+            <option value="${tmplattribute}">${tmplattribute}</option>
+        </#list>
+    </#list>
+</select>
+
+
+<div>
+	<select class="select builderSelectWidget ">
+		<#list listOfTemplates as ss> 
+		<option value="${ss}">${ss}</option>
+		</#list>
+	</select>
+</div>
+
+
+<!--
+[@ui.bambooSection title="Servers4"]
+<div>
+ [@ww.iterator  value="complexmap" id="tt"  ]
+ ${tt.key}
+ [@ww.set gname="%{#tt.key}">
+  [@ww.if  gname="firstsaws"]
+  [@ww.iterator  value="%{#tt.value}" id="tts"  ]
+
+
+  <div> [@ww.property name="address" value="%{#tts.key}" /]: [@ww.textfield name="name" value="%{#tts.value}" /]<div/>
+ 
+ [/@ww.iterator]
+ [/@ww.if]
+[/@ww.set]
+[/@ww.iterator]
+
+</div>
+[/@ui.bambooSection ]  -->
+
+
+[@ui.bambooSection title="Servers4"]
+<div>
+ [@ww.iterator  value="complexmap" id="tt"  ]
+ ${tt.key}
+ [@ww.set gname="%{#tt.key}">
+  [@ww.if  gname="firstsaws"]
+  [@ww.iterator  value="%{#tt.value}" id="tts"  ]
+
+
+  <div> [@ww.property name="address" value="%{#tts.key}" /]: [@ww.textfield name="name" value="%{#tts.value}" /]<div/>
+ 
+ [/@ww.iterator]
+ [/@ww.if]
+[/@ww.set]
+[/@ww.iterator]
+
+</div>
+[/@ui.bambooSection ] 
+
+
+ 
+
+[@ui.bambooSection  title="Servers1" ]
+ <div id="lr-deployOrUpdate-servers" style="display: block;">
+ [@ww.iterator  value="tasklist" id="ss"  ]
+  <div> [@ww.property name="parameterKey" value="%{#ss.parameterKey}" /]:[@ww.textfield name="parameterValue" value="%{#ss.parameterValue}" /]<div/>
+[/@ww.iterator]
+</div>
+[/@ui.bambooSection ]
+
+
+[@ui.bambooSection title="Servers2"]
+ <div>
+ [@ww.iterator  value="singletemplatedata" id="singletemplatedata"  ]
+  <div> [@ww.property name="address" value="%{#singletemplatedata.key}" /]:[@ww.textfield name="name" value="%{#singletemplatedata.value}" /]<div/>
+[/@ww.iterator]
+</div>
+[/@ui.bambooSection ]
+
+${artifactIdsList}
+
+[@ui.bambooSection title="Servers3"]
+ <div>
+ [@ww.iterator  value="allTemplateDatas" id="tt"  ]
+ [@ww.iterator  value="tt" id="tts"  ]
+  <div> [@ww.property name="address" value="%{#tts.key}" /]: [@ww.textfield name="name" value="%{#tts.value}" /]<div/>
+  [/@ww.iterator   ]
+[/@ww.iterator]
+</div>
+[/@ui.bambooSection ]
+
+
+
+
+
+
+
+[@ui.bambooSection title="Servers4"]
+<div>
+	[@ww.iterator value="complexmap" id="tt" ] ${tt.key} [@ww.set
+	gname="%{#tt.key}"> [@ww.if gname="firstsaws"] [@ww.iterator
+	value="%{#tt.value}" id="tts" ]
+	<div>
+		[@ww.property name="address" value="%{#tts.key}" /]: [@ww.textfield
+		name="name" value="%{#tts.value}" /]
+		<div />
+		[/@ww.iterator] [/@ww.if] [/@ww.set] [/@ww.iterator]
+	</div>
+	[/@ui.bambooSection ]
+	
+[@ww.set name="personName"]
+  [@ww.property  value="${req.contextPath}" /]
+[/@ww.set]
+Hello, [@ww.property id="clientidid" value="%{#personName}"/]. How are you?
+
+<div id="persondiv">
+ <input type="text" id="qwert" name="testperson" value=${personName}>
+</input>
+</div>  
+	
+	
+	
+	 [@ui.messageBox type="hint"]
+        [@ui.displayText key="com.arm.plugins.bamboo.lsf.cjmenabledscript.daemonlog.hint"/]
+    [/@ui.messageBox]
+    
+    
+    [@ww.hidden name="temporary.p4.passwordChange" value="true" /]
+[@ww.password labelKey='repository.p4.password' name='temporary.p4.password'
+helpKey='perforce.fields' required='false'/]
+    

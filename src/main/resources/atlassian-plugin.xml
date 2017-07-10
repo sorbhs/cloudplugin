@@ -1,0 +1,78 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}"
+	plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="plugin-icon">images/pluginIcon.png</param>
+		<param name="plugin-logo">images/pluginLogo.png</param>
+		<param name="configure.url">/plugins/servlet/xproduct/admin</param>
+	</plugin-info>
+
+	<!-- add our i18n resource -->
+	<resource type="i18n" name="i18n" location="cloudplugin" />
+
+	<!-- add our web resources -->
+	<web-resource key="cloudplugin-resources" name="cloudplugin Web Resources">
+		<dependency>com.atlassian.auiplugin:ajs</dependency>
+
+		<resource type="download" name="cloudplugin.css" location="/css/cloudplugin.css" />
+		<resource type="download" name="cloudplugin.js" location="/js/cloudplugin.js" />
+		<resource type="download" name="images/" location="/images" />
+		<context>cloudplugin</context>
+	</web-resource>
+
+	<rest key="rest" path="/xproduct-admin" version="1.0">
+		<description>Provides REST resources for the admin UI.</description>
+	</rest>
+
+	<web-item key="bamboo-menu-item" name="XProduct Admin"
+		section="system.admin/plugins" weight="10" application="bamboo">
+		<description>Link to xproduct-admin page.</description>
+		<label key="CloudBag Admin" />
+		<link linkId="xproduct-admin-link">/plugins/servlet/xproduct/admin</link>
+	</web-item>
+
+	<taskType key="myFirstTask" name="My First Task"
+		class="com.mindtree.digital.task.MyFirstTask">
+		<description>A task that prints 'Hello, World!'</description>
+		<!-- Categories available in 3.1: "builder", "test" and "deployment" <category 
+			name=""/> -->
+		<category name="builder" />
+		<category name="deployment" />
+		<configuration class="com.mindtree.digital.task.ExampleTaskConfigurator" />
+		<resource type="freemarker" name="edit" location="editExampleTask.ftl" />
+		<resource type="i18n" name="helloworld language" location="english" />
+	</taskType>
+
+	<servlet name="Hello World Servlet" key="helloWorld"
+		class="com.mindtree.digital.task.HelloWorldServlet">
+		<description>Says Hello World, Australia or your name.</description>
+		<url-pattern>/helloworld</url-pattern>
+		<init-param>
+			<param-name>defaultName</param-name>
+			<param-value>Australia</param-value>
+		</init-param>
+	</servlet>
+	<servlet name="Persist Template Servlet" key="persistTemplate"
+		class="com.mindtree.digital.task.PersistTemplateDataServlet">
+		<description>Persists Template data while saving</description>
+		<url-pattern>/persisttemplatedata</url-pattern>
+		<init-param>
+			<param-name>defaultName</param-name>
+			<param-value>PersistData</param-value>
+		</init-param>
+	</servlet>
+	<servlet name="Fetch Parameters" key="fetchParametersData"
+		class="com.mindtree.digital.task.FetchParameterDetails">
+		<description>Fetch Parameters while first load</description>
+		<url-pattern>/fetchparametersdata</url-pattern>
+		<init-param>
+			<param-name>defaultName</param-name>
+			<param-value>fetchParameters</param-value>
+		</init-param>
+	</servlet>
+	<servlet key="admin-servlet" class="com.mindtree.digital.task.AdminServlet">
+		<url-pattern>/xproduct/admin</url-pattern>
+	</servlet>
+</atlassian-plugin>

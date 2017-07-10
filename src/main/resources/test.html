@@ -1,0 +1,147 @@
+<html>
+<head>
+</head>
+<body>
+<input type="text">
+<h3>HELOoooooooooooooooooooooo this is AAAJJJAAAAXXXXXXXXXXXXXXX</h3>>
+</body>
+</html>
+
+	
+	<div id="phonediv">
+[#list paramvalueds as myphone]
+[@ww.set name="dd"]
+[@ww.property  value=myphone /]
+[/@ww.set]
+[@ww.textfield labelKey=dd value=dd name=executableTypeKey description=""/]
+[/#list]
+ </div> 
+ 
+ 
+ 
+ [@ww.select list=phonelist toggle="true"   emptyOption=true onchange='javascript: showphonedata(this.value)'  id='phoneid' label="List Of phones" listKey='value' listValue='value' name="phoneselectlist" /]
+
+ 
+ 
+ <script type="text/javascript">
+function loadme() {
+var BASE_URL = '${baseUrl}';
+ var asdf=document.getElementById("qwert").value;
+  AJS.$.ajax({
+   type: "GET",
+ 	url:  BASE_URL+"/plugins/servlet/helloworld",
+  success: function(json){
+	var container = document.getElementById("sorbhs");
+	
+	container.appendChild(document.createTextNode("haha"));
+var input = document.createElement("input");
+input.type = "text";
+input.name = "hihi";
+input.className = "text text";
+input.defaultValue=json;
+container.appendChild(input);
+  },
+   error: function () {
+					alert("failed");
+                        }
+   });
+}
+
+function showphonedata(phoneName){
+ var container = document.getElementById("phonediv2");
+ while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+ var deployType=document.getElementById("phoneid");
+ var x=document.getElementById("phonediv2");
+  x.style.display = 'none';
+  x.style.display = 'block';
+  
+   var option1 = document.createElement('input');
+   option1.value = phoneName;
+   option1.className = "text text";
+   option1.type = "text";
+option1.id = "ssphoneid1";
+option1.name = "ssphoneid1";
+    x.appendChild(option1);
+   
+     var option2 = document.createElement('input');
+   option2.value = phoneName;
+   option2.className = "text text";
+   option2.type = "text";
+option2.id = "ssphoneid2";
+option2.name = "ssphoneid2";
+    x.appendChild(option2);
+    var optionkeys=[];
+     optionkeys.push(option1.id);
+    optionkeys.push(option2.id);
+    
+     var savekeys = document.createElement('input');
+     savekeys.value = optionkeys;
+     savekeys.className = "text text";
+    savekeys.type = "text";
+	savekeys.id = "savekeysid";
+	savekeys.name = "savekeysid";
+    x.appendChild(savekeys);
+    
+    var el2 = document.getElementById("persistphoneid");
+    el2.value=phoneName;
+    fetchtest();
+}       
+
+function fetchtest(){
+
+var dd=document.getElementById("savekeysid").value;
+alert(dd);
+}
+ 
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+function parameterKeysandValues(paramKeys,paramValues){
+var container = document.getElementById("sorbhs2");
+while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+	var BASE_URL = '${baseUrl}';
+	for(var i=0;i<paramKeys.length;i++){
+		}	
+	AJS.$.ajax({
+ 	url:  BASE_URL+"/plugins/servlet/persisttemplatedata?paramKeys="+paramKeys+"&paramValues="+paramValues,
+ 	dataType: 'json',
+ 	cache: false,
+  	success: function(p){
+			for (var key in p) {
+			if(p.hasOwnProperty(key)) {
+			container.appendChild(document.createTextNode(key));
+			var input = document.createElement("input");
+			input.type = "text";
+			input.name = key;
+			paramKeys.push(key);
+			input.className = "text text";
+			input.defaultValue=p[key];
+			paramValues.push(p[key]);
+			container.appendChild(input);
+			container.appendChild(document.createElement("br"));
+					}
+				}
+  	}, complete: function (data) {
+     },
+    error: function () {
+			alert("failed");
+    }
+  });	
+}
+ 

@@ -1,0 +1,365 @@
+<html>
+<head>
+
+<script type="text/javascript">
+	function codeAddress() {
+		var scloudprovider = '${cloudprovider}';
+		if (scloudprovider == "AWS") {
+			var sawstemplate = '${awstemplate}';
+			var myvalue = sawstemplate;
+			var container = document.getElementById("sorbhs");
+			while (container.hasChildNodes()) {
+				container.removeChild(container.lastChild);
+			}
+
+			var BASE_URL = '${baseUrl}';
+			AJS.$
+					.ajax({
+						url : BASE_URL
+								+ "/plugins/servlet/helloworld?templateName="
+								+ myvalue,
+						dataType : 'json',
+						cache : false,
+						success : function(p) {
+							for ( var key in p) {
+								if (p.hasOwnProperty(key)) {
+									container.appendChild(document
+											.createTextNode(key));
+									var input = document.createElement("input");
+									input.type = "text";
+									input.name = key;
+									input.className = "text text";
+									input.defaultValue = p[key];
+									container.appendChild(input);
+									container.appendChild(document
+											.createElement("br"));
+								}
+							}
+						},
+						error : function() {
+							alert("failed");
+						}
+					});
+		} else {
+			var sazuretemplate = '${azuretemplate}';
+			alert(sazuretemplate);
+			var myvalue = sazuretemplate;
+			var container = document.getElementById("sorbhs");
+			while (container.hasChildNodes()) {
+				container.removeChild(container.lastChild);
+			}
+
+			var BASE_URL = '${baseUrl}';
+			AJS.$
+					.ajax({
+						url : BASE_URL
+								+ "/plugins/servlet/helloworld?templateName="
+								+ myvalue,
+						dataType : 'json',
+						cache : false,
+						success : function(p) {
+							for ( var key in p) {
+								if (p.hasOwnProperty(key)) {
+									container.appendChild(document
+											.createTextNode(key));
+									var input = document.createElement("input");
+									input.type = "text";
+									input.name = key;
+									input.className = "text text";
+									input.defaultValue = p[key];
+									container.appendChild(input);
+									container.appendChild(document
+											.createElement("br"));
+								}
+							}
+						},
+						error : function() {
+							alert("failed");
+						}
+					});
+		}
+	}
+	codeAddress();
+</script>
+
+</head>
+<body>
+	[@ww.select list=operation toggle="true" label="Operation"
+	listKey='value' listValue='value' name="myoperation" /] [@ww.select
+	list=region toggle="true" label="Region" listKey='value'
+	listValue='value' name="cloudregion" /] [@ww.textfield tooltip="Enter
+	the customer name" class="text long-field "
+	labelKey="helloworld.clientID" name="clientid" required='true'/]
+
+	[@ww.textfield class="text long-field "
+	labelKey="helloworld.clientSecret" name="clientsecret"
+	required='true'/] [@ww.textfield class="text long-field "
+	labelKey="helloworld.tenantID" name="tenantid" required='true'/]
+
+	[@ww.textfield class="text long-field "
+	labelKey="helloworld.subscriptionID" name="subscriptionid"
+	required='true'/] [@ww.textfield class="text long-field "
+	labelKey="helloworld.resourceGroupName" name="resourcegroupname"
+	required='true'/] [@ww.textfield class="text long-field
+	"labelKey="helloworld.deploymentName" name="deploymentname"
+	required='true'/] [@ww.select list=cloudProvider toggle="true"
+	label="Cloud Provider" onchange='javascript: clearparams()'
+	listKey='value' listValue='value' name="cloudprovider" /]
+
+	[@ui.bambooSection dependsOn='cloudprovider' showOn='AWS'] [@ww.select
+	list=listOfAWSTemplates toggle="true" onchange='javascript:
+	loadSingleTemplateParams(this.value)' id='awsid' label="List Of
+	Scripts" listKey='value' listValue='value' name="awstemplate" /]
+
+	[/@ui.bambooSection] [@ui.bambooSection dependsOn='cloudprovider'
+	showOn='Azure'] [@ww.select list=listOfAZURETemplates toggle="true"
+	onchange='javascript: loadSingleTemplateParams(this.value)'
+	id="azureid" label="List Of Scripts" listKey='value' listValue='value'
+	name="azuretemplate" /] [/@ui.bambooSection] [@ww.select list=phonelist
+	toggle="true" emptyOption=true onchange='javascript:
+	showphonedata(this.value)' id='phoneid' label="List Of phones"
+	listKey='value' listValue='value' name="phoneselectlist" /] [@ww.hidden
+	name="hiddenname" value="true" /]
+
+	<div id="phonediv">[#list phonelistd as myphone] [@ww.set
+		name="dd"] [@ww.property value=myphone /] [/@ww.set] [@ww.textfield
+		labelKey=dd value="some value" name=executableTypeKey
+		description="describe of phone"/] [/#list]</div>
+
+	<div id="phonediv2"></div>
+	<div id="savekeysvalues"></div>
+
+	<p>++++++++++++++++++++++++++++++++++++++++++++++++++</p>
+	<div id="sorbhs"></div>
+</body>
+<p>***********************************************************************</p>
+<div id="sorbhs2"></div>
+<p>${saveparamkeysid}</p>
+<p>${saveparamvaluesid}</p>
+<p>${ssphoneid2}</p>
+<p>${persistphonename}</p>
+[@ww.textfield class="text long-field " id="persistphoneid"
+labelKey="testing persistence" name="persistphonename" required='true'/]
+
+[@ww.textfield class="text long-field " id="jsonpersistid"
+labelKey="testing persistence" name="jsonpersistname" required='true'/]
+</body>
+
+<script type="text/javascript">
+	function showphonedata(phoneName) {
+		var container = document.getElementById("phonediv2");
+		while (container.hasChildNodes()) {
+			container.removeChild(container.lastChild);
+		}
+		var deployType = document.getElementById("phoneid");
+		alert("deploytype = " + deployType.value);
+		var x = document.getElementById("phonediv2");
+		x.style.display = 'none';
+		alert(phoneName);
+		x.style.display = 'block';
+
+		var option1 = document.createElement('input');
+		option1.value = phoneName;
+		option1.className = "text text";
+		option1.type = "text";
+		option1.id = "ssphoneid1";
+		option1.name = "ssphoneid1";
+		x.appendChild(option1);
+
+		var option2 = document.createElement('input');
+		option2.value = phoneName;
+		option2.className = "text text";
+		option2.type = "text";
+		option2.id = "ssphoneid2";
+		option2.name = "ssphoneid2";
+		x.appendChild(option2);
+		var optionkeys = [];
+		optionkeys.push(option1.id);
+		optionkeys.push(option2.id);
+
+		var savekeys = document.createElement('input');
+		savekeys.value = optionkeys;
+		savekeys.className = "text text";
+		savekeys.type = "text";
+		savekeys.id = "savekeysid";
+		savekeys.name = "savekeysid";
+		x.appendChild(savekeys);
+
+		var el2 = document.getElementById("persistphoneid");
+		el2.value = phoneName;
+		fetchtest();
+	}
+
+	function fetchtest() {
+
+		var dd = document.getElementById("savekeysid").value;
+		alert(dd);
+	}
+
+	function loadme() {
+		var BASE_URL = '${baseUrl}';
+		var asdf = document.getElementById("qwert").value;
+		alert(BASE_URL);
+		alert(asdf);
+		AJS.$.ajax({
+			type : "GET",
+			url : BASE_URL + "/plugins/servlet/helloworld",
+			success : function(json) {
+				alert("in success function");
+				alert(json.size);
+				var container = document.getElementById("sorbhs");
+
+				container.appendChild(document.createTextNode("haha"));
+				var input = document.createElement("input");
+				input.type = "text";
+				input.name = "hihi";
+				input.className = "text text";
+				input.defaultValue = json;
+				container.appendChild(input);
+			},
+			error : function() {
+				alert("failed");
+			}
+		});
+	}
+</script>
+
+<script type="text/javascript">
+	function testajax() {
+		AJS.$.ajax({
+			url : "test.html",
+			cache : false,
+			success : function(html) {
+				$("#params").append(html);
+			}
+		});
+	}
+
+	function clearparams() {
+		var container = document.getElementById("sorbhs");
+		while (container.hasChildNodes()) {
+			container.removeChild(container.lastChild);
+		}
+		codeAddress();
+	}
+
+	function loadTemplateData(myvalue, abcv) {
+		var container = document.getElementById("params");
+		while (container.hasChildNodes()) {
+			container.removeChild(container.lastChild);
+		}
+		for (var j = 0; j < abcv.size; j++) {
+			if (myvalue == abcv.templates[j].name) {
+				for ( var key in abcv.templates[j].parameters) {
+					if (abcv.templates[j].parameters.hasOwnProperty(key)) {
+
+						container.appendChild(document.createTextNode(key));
+						var input = document.createElement("input");
+						input.type = "text";
+						input.name = key;
+						input.className = "text text";
+						input.defaultValue = abcv.templates[j].parameters[key];
+						container.appendChild(input);
+						container.appendChild(document.createElement("br"));
+					}
+				}
+			}
+		}
+	}
+
+	function loadSingleTemplateParams(myvalue) {
+		var container = document.getElementById("sorbhs");
+		while (container.hasChildNodes()) {
+			container.removeChild(container.lastChild);
+		}
+
+		var BASE_URL = '${baseUrl}';
+		AJS.$('#loading-image').show();
+		var paramKeys = [];
+		var paramValues = [];
+		AJS.$.ajax({
+			url : BASE_URL + "/plugins/servlet/helloworld?templateName="
+					+ myvalue,
+			dataType : 'json',
+			cache : false,
+			success : function(p) {
+				for ( var key in p) {
+					if (p.hasOwnProperty(key)) {
+						container.appendChild(document.createTextNode(key));
+						var input = document.createElement("input");
+						input.type = "text";
+						input.name = key;
+						input.id = key;
+						paramKeys.push(key);
+						input.className = "text text";
+						input.defaultValue = p[key];
+						paramValues.push(p[key]);
+						container.appendChild(input);
+						container.appendChild(document.createElement("br"));
+						var el2 = document.getElementById("jsonpersistid");
+						el2.value = p;
+					}
+				}
+			},
+			complete : function(data) {
+				var x = document.getElementById("savekeysvalues");
+				var savekeys = document.createElement('input');
+				savekeys.value = paramKeys;
+				savekeys.className = "text text";
+				savekeys.type = "text";
+				savekeys.id = "saveparamkeysid";
+				savekeys.name = "saveparamkeysid";
+				x.appendChild(savekeys);
+
+				var savevalues = document.createElement('input');
+				savevalues.value = paramValues;
+				savevalues.className = "text text";
+				savevalues.type = "text";
+				savevalues.id = "saveparamvaluesid";
+				savevalues.name = "saveparamvaluesid";
+				x.appendChild(savevalues);
+
+			},
+			error : function() {
+				alert("failed");
+			}
+		});
+	}
+
+	function parameterKeysandValues(paramKeys, paramValues) {
+		var container = document.getElementById("sorbhs2");
+		while (container.hasChildNodes()) {
+			container.removeChild(container.lastChild);
+		}
+		var BASE_URL = '${baseUrl}';
+		for (var i = 0; i < paramKeys.length; i++) {
+		}
+		AJS.$.ajax({
+			url : BASE_URL + "/plugins/servlet/persisttemplatedata?paramKeys="
+					+ paramKeys + "&paramValues=" + paramValues,
+			dataType : 'json',
+			cache : false,
+			success : function(p) {
+				for ( var key in p) {
+					if (p.hasOwnProperty(key)) {
+						container.appendChild(document.createTextNode(key));
+						var input = document.createElement("input");
+						input.type = "text";
+						input.name = key;
+						paramKeys.push(key);
+						input.className = "text text";
+						input.defaultValue = p[key];
+						paramValues.push(p[key]);
+						container.appendChild(input);
+						container.appendChild(document.createElement("br"));
+					}
+				}
+			},
+			complete : function(data) {
+			},
+			error : function() {
+				alert("failed");
+			}
+		});
+	}
+</script>
